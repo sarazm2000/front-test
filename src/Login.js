@@ -10,6 +10,7 @@ const Login = () => {
   const gotoSignUpPage = () => navigate("/register");
 
   const postLoginDetails = () => {
+    
     fetch("http://localhost:8000/api/accounts/login", {
         method: "POST",
         body: JSON.stringify({
