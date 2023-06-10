@@ -14,9 +14,9 @@ const App = () => {
       <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/profile' element={<Profile isProfile={true} />} />
+          <Route path='/profile' element={<Profile />} />
           <Route path='/add-post' element={<AddPost />} />
-          <Route path='/timeline' element={<Profile isProfile={false} />} />
+          <Route path='/timeline' element={<Timeline  />} />
           <Route path='/edit' element={<Edit />} />
       </Routes>
     </BrowserRouter>

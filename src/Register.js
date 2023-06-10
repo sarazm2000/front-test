@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Style.css";
 
 
@@ -7,40 +8,51 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  const postLoginDetails = () => {
-    fetch("http://localhost:8000/api/accounts/register", {
-        method: "POST",
-        body: JSON.stringify({
-            username,
-            password,
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((err) => console.error(err));
-};
+  const [token, setToken] = useState('');
+  const [status, setStatus] = useState(0);
+  const [err, setErr] = useState('')
 
 
-  const handleRegister = (e) => {
+
+
+  const baseURL = 'http://127.0.0.1:8000/api/accounts/register/'
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle registration logic here
+    const userData = {
+      username: username,
+      password: password
+    };
+    const log = axios.post(baseURL, userData).then((response) => {
+      setToken(response.data.access)
+      setStatus(response.status)
+      window.localStorage.setItem('token', response.data.access);
+    }) 
 
-    postLoginDetails();
-    setPassword("");
-    setUsername("");
+    .catch (error => {
+      setStatus(error.response.status)
+      error.response.data.password ?  setErr(error.response.data.password[0]) 
+      : setErr(error.response.data.username[0])
+    })
   };
+
+
+
+
+  useEffect(() => {
+    setToken("")
+    setStatus(0)
+    setUsername("")
+    setPassword("")
+    setErr("")
+
+  }, []);
+
 
   const gotoLoginPage = () => navigate("/");
   return (
     <div className="form-container">
       <h1 className='title-page'>Register</h1>
-      <form className="form" >
+      <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
@@ -58,6 +70,11 @@ const Register = () => {
         <p className='link-text'>Already have an account? <a className='nav-link' onClick={gotoLoginPage}>Click here!</a></p>
         <input type="submit" value="Register" className="btn" />
       </form>
+      {
+        status === 0 ? (<></>) : (status === 201 ? (<div className='success'>You logged in</div>) 
+        :  (<div className='err'>{err}</div>)
+        )       
+      }
     </div>
   );
 };
