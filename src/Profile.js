@@ -55,7 +55,7 @@ const Profile = ({isProfile}) => {
 }, []);
 
 
-  const gotoFriendsList = () => navigate("/friends");
+  const gotoFriendsList = () => navigate("/FriendsList");
   const gotoEdit = () => navigate("/edit");
   
   const isAuthenticate = () => {
