@@ -7,27 +7,36 @@ export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
 
   const fetchData = (value) => {
-    console.log("fetchData called with value:", value); // debug log
-    fetch("http://127.0.0.1:8000/api/friends/search/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${window.localStorage.getItem('token')}`, // replace with your token
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        const results = json.filter((user) => {
-          return (
-            value &&
-            user &&
-            user.username &&
-            user.username.toLowerCase().startsWith(value.toLowerCase())
-          );
+    const username = value.trim(); // Trim the input value to remove leading/trailing spaces
+    console.log("fetchData called with value:", username); // debug log
+    if (username) {
+      fetch(`http://127.0.0.1:8000/api/friends/search/?username=${username}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`, // replace with your token
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          const results = json.filter((user) => {
+            return (
+              value &&
+              user &&
+              user.username &&
+              user.username.toLowerCase().startsWith(value.toLowerCase())
+            );
+          });
+          setResults(results); // Set the results directly from the response
+        })
+        .catch((error) => {
+          console.error("Error fetching search results:", error);
         });
-        setResults(results);
-      });
+    } else {
+      // If the input value is empty, reset the results
+      setResults([]);
+    }
   };
 
   const handleChange = (value) => {
