@@ -13,10 +13,6 @@ const Login = () => {
 
   const gotoSignUpPage = () => navigate("/register");
 
-  const getToken = () => {
-    return window.localStorage.getItem('token');
-  };
-
   const baseURL = 'http://127.0.0.1:8000/api/accounts/login/';
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,9 +77,8 @@ const Login = () => {
         </form>
 
         {
-        status === 0 ? (<></>) : (status === 201 ? (<div className='success'>You logged in</div>) 
-        :  (<div className='err'>{err}</div>)
-        )       
+        status === 401 ? (<div className='err'>{err}</div>):    
+        (<div className='success'>You logged in</div>) 
       }
 
       </div>))
