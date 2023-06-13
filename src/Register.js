@@ -26,11 +26,12 @@ const Register = () => {
       setToken(response.data.access)
       setStatus(response.status)
       window.localStorage.setItem('token', response.data.access);
+      navigate("/profile")
     }) 
 
     .catch (error => {
       setStatus(error.response.status)
-      error.response.data.password ?  setErr(error.response.data.password[0]) 
+      error.response.data.password === null ?  setErr(error.response.data.password[0]) 
       : setErr(error.response.data.username[0])
     })
   };

@@ -31,8 +31,11 @@ const Login = () => {
       navigate("/profile")
     })
       .catch(error => {
-        setStatus(error.response.status)
+        console.log(error.response.status);
         setErr(error.response.data.detail)
+        setStatus(error.response.status)
+        // error.response.data.password === null ?  setErr(error.response.data.password[0]) 
+        // : setErr(error.response.data.username[0])
       })
   };
 
@@ -76,6 +79,12 @@ const Login = () => {
           <p className='link-text'>Don't have account? <a className='nav-link' onClick={gotoSignUpPage}>Click here!</a></p>
           <input type="submit" value="Login" className="btn" />
         </form>
+
+        {
+        status === 0 ? (<></>) : (status === 201 ? (<div className='success'>You logged in</div>) 
+        :  (<div className='err'>{err}</div>)
+        )       
+      }
 
       </div>))
 };
