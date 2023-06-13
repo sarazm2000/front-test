@@ -1,13 +1,20 @@
 // FriendsList.jsx
 
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../Helpers';
 import './FriendsList.css'; // Import your CSS
 
 const FriendsList  = () => {
     const [friendsList, setFriendsList] = useState([]);
+    const navigate = useNavigate();
     const apiUrl = `http://127.0.0.1:8000/api/friends/crud/`; // Your API URL here
 
+
     useEffect(() => {
+        if (!isLoggedIn())
+          navigate('/');
+        else {
         fetch(apiUrl, {
             method: 'GET',
             headers: {
@@ -26,7 +33,7 @@ const FriendsList  = () => {
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-        });
+        });}
     }, []);
 
     const handleDeleteFriend = async (friendId) => {
@@ -48,8 +55,12 @@ const FriendsList  = () => {
         setFriendsList(friendsList.filter(friend => friend.id !== friendId));
     };
 
+    const goBack = () => navigate("/profile");
     return (
+        <>
+        <div className="back" onClick={goBack}>back</div>
         <div className="friends-list">
+            
             <h1>Your Friends</h1>
             <div style={{ overflowY: 'scroll', height: '200px' }}>
                 {friendsList.map(friend => 
@@ -60,6 +71,8 @@ const FriendsList  = () => {
                 )}
             </div>
         </div>
+        </>
+        
     );
 };
 

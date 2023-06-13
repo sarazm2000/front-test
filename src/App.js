@@ -13,25 +13,27 @@ import { FriendsList } from './FriendsListComponent/FriendsList'; // Import your
 
 
 const App = () => {
+  
   const [results, setResults] = useState([]);
   return (
-    <BrowserRouter>
+  
+    <BrowserRouter >
       <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/add-post' element={<AddPost />} />
-          <Route path='/timeline' element={<Timeline  />} />
-          <Route path="/search" element={
-          <div className="App">
-            <div className="search-bar-container">
-              <SearchBar setResults={setResults} />
-              {results && results.length > 0 && <SearchResultsList results={results} />}
+      <Route path='/' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/add-post' element={<AddPost />} />
+            <Route path='/timeline' element={<Timeline  />} />
+            <Route path="/search" element={
+            <div className="App">
+              <div className="search-bar-container">
+                <SearchBar setResults={setResults} />
+                {results && results.length > 0 && <SearchResultsList results={results} />}
+              </div>
             </div>
-          </div>
-        } />
-          <Route path='/edit' element={<Edit />} />
-          <Route path="/FriendsList" element={<FriendsList />} />
+          } />
+            <Route path='/edit' element={<Edit />} />
+            <Route path="/friends" element={<FriendsList />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,20 +1,44 @@
-import React from "react";
+import axios from "axios";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
-const Post = ({username, content}) => {
-    const navigate = useNavigate();
 
-    const logout = () => {
-        localStorage.clear();
-        navigate("/");  
-      }
-      
+const Post = () => {
+    const navigate = useNavigate();
+    const [posts, setPosts] = useState([]);
+
+    const baseURL = 'http://127.0.0.1:8000/api/posts/crud/';
+    
+      useEffect(() => {
+        axios.get(baseURL, {
+            headers: {
+              'Authorization': `Bearer ${window.localStorage.getItem('token')}`, // Your token here
+            }
+          })
+          .then(res => {
+              // setUsername(res.data.user.username);
+              // setDate(res.data.created);
+              // setId(res.data.id);
+              // setContent(res.data.text);
+              let arr = res.data;
+              setPosts(arr);
+              console.log("hi",posts);
+          })
+          .catch (err => {
+            console.log(err);
+          })
+ 
+    }, []);
+
     return (
         <>
-        <div className="post">
-            <h4>{username}</h4>
-            <p>{content}</p>
-        </div>
+        {posts.map((post, index) => (
+          <div key={index} className="post">
+            <h4>{post.user.username}</h4>
+            <p>{post.text}</p>
+          </div>
+        ))}
+            
         </>
     )
 }

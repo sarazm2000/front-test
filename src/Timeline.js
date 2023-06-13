@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from './Helpers';
 
 import Navbar from './Navbar';
 import Post from './Post';
@@ -16,6 +17,7 @@ const Timeline = () => {
   
   const baseURL = "http://127.0.0.1:8000/api/posts/timeline/";
 
+
   const fetchTimelinePosts = async () => {
     await axios.get(baseURL, {
       headers: {
@@ -23,7 +25,9 @@ const Timeline = () => {
       }
     })
     .then(res => {
-      setPosts(res.data)
+      let arr = res.data;
+      setPosts(res.data);
+      console.log("ti", posts);
      })
      .catch (error => {
       setErr(error.response.data.detail)
@@ -31,22 +35,19 @@ const Timeline = () => {
     })
   }
 
-  const logout = () => {
-    localStorage.clear();
-    navigate("/");  
-  }
 
   useEffect(() => {
     // Fetch timeline posts from API and set the state
+    if (!isLoggedIn())
+      navigate('/');
+    else
     fetchTimelinePosts();
   }, []);
 
 
   return (
     <>
-
     <div className='header-container'>
-    <div className="logout" onClick={logout}>logout</div>
           <h1 className='title-page'>Timeline</h1>
         </div>
      <div className="timeline-container">
@@ -54,9 +55,11 @@ const Timeline = () => {
 
       {posts.map((post, index) => (
           <div key={index} className="post">
-            <Post username= {post.username} content={post.content} />
+            <h4>{post.user.username}</h4>
+            <p>{post.text}</p>
           </div>
         ))}
+
       </div>
       <Navbar />
     </div>

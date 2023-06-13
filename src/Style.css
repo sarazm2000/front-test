@@ -160,11 +160,14 @@ background-color: #3367D6;
     padding: .6rem;
     margin: auto;
     font-size: xx-large;
+    background-color: #f2f2f2;
+    border-radius: 2rem;
 }
 
 .edit-name-btn {
     margin: auto;
     margin-top: 1rem;
+    border-radius: 2rem;
 }
 
 .back {

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from "./Helpers";
+
 
 
 const Edit = ({username}) => {
@@ -19,9 +21,15 @@ const Edit = ({username}) => {
       };
       const [token, setToken] = useState(getToken());
 
+    useEffect(() => {
+    // Fetch timeline posts from API and set the state
+    if (!isLoggedIn())
+        navigate('/');
+   
+    }, []);
+
     return (
-        token ? 
-        (<>
+        <>
             <div className="back" onClick={goBack}>back</div>
             <div className="edit-container">
                 <input
@@ -33,9 +41,8 @@ const Edit = ({username}) => {
                 /><br />
                 <input type="submit" value="Edit" className="btn edit-name-btn" onClick={handleSubmit} />
             </div>
-        </>)
-        :
-        (<>{navigate('/')}</>)
+        </>
+
     )
 }
 
