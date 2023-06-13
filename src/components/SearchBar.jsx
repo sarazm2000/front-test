@@ -7,7 +7,6 @@ export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
 
   const fetchData = (value) => {
-    console.log("fetchData called with value:", value); // debug log
     fetch("http://127.0.0.1:8000/api/friends/search/", {
       method: "GET",
       headers: {
@@ -17,7 +16,6 @@ export const SearchBar = ({ setResults }) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const results = json.filter((user) => {
           return (
             value &&
@@ -31,7 +29,6 @@ export const SearchBar = ({ setResults }) => {
   };
 
   const handleChange = (value) => {
-    console.log("handleChange called with value:", value); // debug log
     setInput(value);
     fetchData(value);
   };

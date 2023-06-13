@@ -15,11 +15,22 @@ const Profile = () => {
   const [friends, setFriends] = useState([]);
   const [err, setErr] = useState('');
   const [status, setStatus] = useState(0);
+  const [data, setData] = useState([]);
+
+
+
 
 
   const navigate = useNavigate();
   const postURL = 'http://127.0.0.1:8000/api/posts/crud/'
   const profileURL = 'http://127.0.0.1:8000/api/accounts/profile/'
+
+    
+  useEffect(() => {
+    
+
+}, []);
+
 
   const getName = async () => {
     await axios.get(profileURL, {
@@ -42,6 +53,28 @@ const Profile = () => {
       navigate('/');
     else
       getName();
+      
+    const getData = async () => {
+      await axios.get(postURL, {
+        headers: {
+          'Authorization': `Bearer ${window.localStorage.getItem('token')}`, // Your token here
+        }
+      })
+      .then(res => {
+          // setUsername(res.data.user.username);
+          // setDate(res.data.created);
+          // setId(res.data.id);
+          // setContent(res.data.text);
+          let arr = res.data;
+          setData(arr);
+      })
+      .catch (err => {
+        console.log(err.response);
+      })
+    }
+
+    getData();
+    setUsername(window.localStorage.getItem('username'));
   }, []);
 
 
@@ -70,7 +103,7 @@ const Profile = () => {
         <div className="container">
           <div className="timeline">
 
-            <Post />
+            <Post posts={data} />
 
           </div>
         </div>

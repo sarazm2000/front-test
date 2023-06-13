@@ -25,14 +25,19 @@ const Register = () => {
     const log = axios.post(baseURL, userData).then((response) => {
       setToken(response.data.access)
       setStatus(response.status)
-      window.localStorage.setItem('token', response.data.access);
+      window.localStorage.setItem('username', response.data.username)
+      window.localStorage.setItem('token', response.data.tokens.access);
       navigate("/profile")
     }) 
 
     .catch (error => {
       setStatus(error.response.status)
-      error.response.data.password === null ?  setErr(error.response.data.password[0]) 
-      : setErr(error.response.data.username[0])
+      if (error.response.data.password != null) {
+        setErr(error.response.data.password) 
+      }
+      if (error.response.data.username != null){
+        setErr(error.response.data.username)
+      }
     })
   };
 
