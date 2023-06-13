@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-
+import Navbar from '../Navbar';
 import "./SearchBar.css";
 
 export const SearchBar = ({ setResults }) => {
@@ -44,6 +44,7 @@ export const SearchBar = ({ setResults }) => {
         value={input}
         onChange={(e) => handleChange(e.target.value)}
       />
+      <Navbar /> 
     </div>
   );
 };

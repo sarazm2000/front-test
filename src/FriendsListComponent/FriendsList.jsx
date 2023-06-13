@@ -37,7 +37,6 @@ const FriendsList  = () => {
     }, []);
 
     const handleDeleteFriend = async (friendId) => {
-        // replace with your actual delete friend API
         const deleteUrl = `http://127.0.0.1:8000/api/friends/crud/${friendId}/`; // Your DELETE URL here
         const deleteResponse = await fetch(deleteUrl, {
             method: 'DELETE',
@@ -50,29 +49,25 @@ const FriendsList  = () => {
           console.error("An error occurred while deleting the friend.");
           return;
         }
-    
-        // Remove the friend from local state as well
         setFriendsList(friendsList.filter(friend => friend.id !== friendId));
     };
 
     const goBack = () => navigate("/profile");
     return (
         <>
-        <div className="back" onClick={goBack}>back</div>
-        <div className="friends-list">
-            
-            <h1>Your Friends</h1>
-            <div style={{ overflowY: 'scroll', height: '200px' }}>
+            <div className="back" onClick={goBack}>back</div>
+            <div className="friends-list">
+                <h1>Your Friends</h1>
+                <div style={{ overflowY: 'scroll' }}>
                 {friendsList.map(friend => 
                     <div key={friend.followed.id} className="friend-item">
                         <p>{friend.followed.username}</p>
                         <button onClick={() => handleDeleteFriend(friend.id)}>Delete friend</button>
                     </div>
                 )}
+                </div>
             </div>
-        </div>
         </>
-        
     );
 };
 

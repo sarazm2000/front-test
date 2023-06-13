@@ -1,7 +1,34 @@
 .search-result {
-    padding: 10px 20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #4a4a4a; /* Sets the color of the text to a dark gray */
+  font-size: 18px; /* Makes the text slightly larger */
+  font-weight: bold; /* Makes the text bold */
+  background-color: #f0f0f0; /* Sets a light gray background for each username */
+  border-radius: 10px; /* Rounds the corners of the username box */
+  margin-bottom: 10px; /* Adds some space between each username */
+}
+
+.search-result:hover {
+  background-color: #e6e6e6; /* Changes the background to a slightly darker gray when hovering */
+  cursor: pointer; /* Changes the cursor to a hand pointer when hovering over the username */
+}
+
+  .search-result button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF; /* You can change the color to whatever you want */
+    color: #FFFFFF; /* This will make the text inside the button white */
+    font-size: 16px;
+    cursor: pointer; /* This will show a hand cursor when hovering over the button */
+    transition: background-color 0.3s ease; /* This will animate the color change */
   }
   
-  .search-result:hover {
-    background-color: #efefef;
+  .search-result button:hover {
+    background-color: #0056b3; /* This color will show when hovering over the button */
   }
+  
