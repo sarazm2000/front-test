@@ -9,7 +9,7 @@ const AddPost = () => {
     const [post, setPost] = useState('');
     const baseURL = 'http://127.0.0.1:8000/api/posts/crud/';
     const navigate = useNavigate();
-    
+
     useEffect(()=>{
         if(!isLoggedIn())
             navigate('/');
@@ -28,10 +28,8 @@ const AddPost = () => {
           text: post
         };
           axios.post(baseURL, userData, config).then((response) => {
-            console.log(response);    
         }) 
         .catch (error => {
-            console.log(error);
         //   setStatus(error.response.status)
         //   setErr(error.response.data.detail)
         })

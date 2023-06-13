@@ -19,10 +19,8 @@ export const SearchResult = ({ result }) => {
     const friendsList = await getResponse.json();
 
     // Log the friends list to the console
-    console.log(friendsList);
 
     let followedUsernames = friendsList.map(obj => obj.followed.username);
-    console.log(followedUsernames); // This will log an array of usernames
 
       // Check if the username is already in the followedUsernames list
     if (followedUsernames.includes(result.username)) {
@@ -53,7 +51,7 @@ export const SearchResult = ({ result }) => {
         return response.json();
       })
       .then(data => {
-        console.log('Friend added successfully:', data);
+        console.log(data);
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);

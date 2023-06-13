@@ -40,7 +40,6 @@ export const SearchBar = ({ setResults }) => {
   };
 
   const handleChange = (value) => {
-    console.log("handleChange called with value:", value); // debug log
     setInput(value);
     fetchData(value);
   };

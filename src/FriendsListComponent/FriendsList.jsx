@@ -28,7 +28,6 @@ const FriendsList  = () => {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             setFriendsList(data);
         })
         .catch(error => {

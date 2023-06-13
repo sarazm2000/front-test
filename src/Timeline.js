@@ -27,7 +27,6 @@ const Timeline = () => {
     .then(res => {
       let arr = res.data;
       setPosts(res.data);
-      console.log("ti", posts);
      })
      .catch (error => {
       setErr(error.response.data.detail)
