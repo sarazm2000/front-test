@@ -158,6 +158,14 @@ body {
 .edit {
   margin: 0.25rem;
   cursor: pointer;
+  background-color: #efe;
+  width: fit-content;
+  padding: .3rem .7rem;
+  color: #3367d6;
+  margin: auto;
+  border-radius: 1rem;
+  margin-top: .4rem;
+
 }
 
 .edit-title {
@@ -199,6 +207,10 @@ label {
   cursor: pointer;
   font-size: large;
   font-weight: 800;
+  background-color: #eee;
+  width: fit-content;
+  padding: .5rem .7rem;
+  border-radius: 1rem;
 }
 
 .back:hover {
@@ -221,4 +233,10 @@ label {
   text-align: left;
   margin-left: 1.5rem;
   cursor: pointer;
+  font-weight: bold;
+  max-width: fit-content;
+  background-color: #efe;
+  border-radius: .5rem;
+  padding: .3rem .5rem;
+  color: #333;
 }

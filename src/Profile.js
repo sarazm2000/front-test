@@ -93,8 +93,8 @@ const Profile = () => {
       <div className='header-container'>
         <div className="logout" onClick={logout}>logout</div>
         <h1 className='title-page'>{username}</h1>
-        <div className='edit' onClick={gotoEdit}>Edit</div>
-        <h3 className='title-page friends-list-title page-link' onClick={gotoFriendsList}>Friends</h3>
+        <h3 className='edit' onClick={gotoEdit}>Edit</h3>
+        <h3 className='title-page friends-list-title page-link edit' onClick={gotoFriendsList}>Friends</h3>
       </div>
 
       <ul>
