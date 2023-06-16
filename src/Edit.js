@@ -79,9 +79,10 @@ const Edit = () => {
             }
         };
         axios.get(baseURL, config).then((response) => {
+            console.log(response.data);
             setCurrentEmail(response.data.email);
-            setCurrentFName(response.data.firstname);
-            setCurrentLName(response.data.lasttname);
+            setCurrentFName(response.data.first_name);
+            setCurrentLName(response.data.last_name);
             setCurrentUsername(response.data.username);
         })
             .catch(error => {
