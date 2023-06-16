@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Style.css";
+import { isLoggedIn } from './Helpers';
 
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [token, setToken] = useState('');
   const [status, setStatus] = useState(0);
   const [err, setErr] = useState('')
 
@@ -23,7 +23,6 @@ const Register = () => {
       password: password
     };
     const log = axios.post(baseURL, userData).then((response) => {
-      setToken(response.data.access)
       setStatus(response.status)
       window.localStorage.setItem('username', response.data.username)
       window.localStorage.setItem('token', response.data.tokens.access);
@@ -45,11 +44,15 @@ const Register = () => {
 
 
   useEffect(() => {
-    setToken("")
-    setStatus(0)
-    setUsername("")
-    setPassword("")
-    setErr("")
+    if (isLoggedIn())
+      navigate('/profile');
+    else {
+      setStatus(0)
+      setUsername("")
+      setPassword("")
+      setErr("")
+    }
+
 
   }, []);
 

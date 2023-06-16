@@ -50,8 +50,8 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (!isLoggedIn())
-      navigate('/');
+    if (isLoggedIn())
+      navigate('/profile');
     else {
       setStatus(0)
       setUsername("")
