@@ -35,6 +35,8 @@ body {
   width: 100%;
   margin-bottom: 10px;
   padding: 10px;
+  border: solid #4285f4;
+  border-radius: 3rem;
 }
 
 .btn {
@@ -43,7 +45,11 @@ body {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  font-weight: 800;
+  text-transform: uppercase;
 }
+
+
 
 .btn:hover {
   background-color: #3367d6;

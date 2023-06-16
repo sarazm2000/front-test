@@ -80,7 +80,7 @@ const Login = () => {
             required
           /><br />
           <p className='link-text'>Don't have account? <a className='nav-link' onClick={gotoSignUpPage}>Click here!</a></p>
-          <input type="submit" value="Login" className="btn" />
+          <input type="submit" value="Login" className="btn log-btn" />
 
         </form>
 
