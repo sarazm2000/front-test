@@ -14,7 +14,7 @@ const Timeline = () => {
   const navigate = useNavigate();
 
 
-  
+
   const baseURL = "http://127.0.0.1:8000/api/posts/timeline/";
 
 
@@ -24,14 +24,14 @@ const Timeline = () => {
         'Authorization': `Bearer ${window.localStorage.getItem('token')}`, // Your token here
       }
     })
-    .then(res => {
-      let arr = res.data;
-      setPosts(res.data);
-     })
-     .catch (error => {
-      setErr(error.response.data.detail)
-      setStatus(error.response.status)
-    })
+      .then(res => {
+        let arr = res.data;
+        setPosts(res.data);
+      })
+      .catch(error => {
+        setErr(error.response.data.detail)
+        setStatus(error.response.status)
+      })
   }
 
 
@@ -40,28 +40,28 @@ const Timeline = () => {
     if (!isLoggedIn())
       navigate('/');
     else
-    fetchTimelinePosts();
+      fetchTimelinePosts();
   }, []);
 
 
   return (
     <>
-    <div className='header-container'>
-          <h1 className='title-page'>Timeline</h1>
-        </div>
-     <div className="timeline-container">
-      <div className="timeline">
-
-      {posts.map((post, index) => (
-          <div key={index} className="post">
-            <h4>{post.user.username}</h4>
-            <p>{post.text}</p>
-          </div>
-        ))}
-
+      <div className='header-container header-container-tl'>
+        <h1 className='title-page'>Timeline</h1>
       </div>
-      <Navbar />
-    </div>
+      <div className="timeline-container">
+        <div className="timeline">
+
+          {posts.map((post, index) => (
+            <div key={index} className="post">
+              <h4>{post.user.username}</h4>
+              <p>{post.text}</p>
+            </div>
+          ))}
+
+        </div>
+        <Navbar />
+      </div>
     </>
   );
 };

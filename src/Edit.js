@@ -18,7 +18,7 @@ const Edit = () => {
 
     const [errUsername, setErrUsername] = useState('');
     const [errEmail, setErrEmail] = useState('');
-    const [status, setStatus] = useState(0);
+    const [status, setStatus] = useState();
 
     const baseURL = 'http://127.0.0.1:8000/api/accounts/profile/';
 
@@ -40,14 +40,13 @@ const Edit = () => {
             "last_name": lasttname
         };
         axios.put(baseURL, userData, config).then((response) => {
+            setStatus(response.status)
             setErrUsername('');
             setErrEmail('');
-            console.log(response);
-            setStatus()
 
         })
             .catch(error => {
-                console.log(error.response);
+                setStatus(error.response.status)
                 if (error.response.data.username) {
                     console.log(error.response.data.username[0]);
                     //   setStatus(error.response.status)
@@ -61,6 +60,7 @@ const Edit = () => {
                 }
 
             })
+
     }
 
     const navigate = useNavigate();
@@ -79,7 +79,6 @@ const Edit = () => {
             }
         };
         axios.get(baseURL, config).then((response) => {
-            console.log(response);
             setCurrentEmail(response.data.email);
             setCurrentFName(response.data.firstname);
             setCurrentLName(response.data.lasttname);
@@ -87,12 +86,10 @@ const Edit = () => {
         })
             .catch(error => {
                 if (error.response.data.username) {
-                    console.log(error.response.data.username[0]);
                     //   setStatus(error.response.status)
                     setErrUsername(error.response.data.username[0])
                 }
-                console.log(errUsername.response);
-                if (error.response.statusText === "Unauthorized") 
+                if (error.response.statusText === "Unauthorized")
                     navigate("/");
             })
 
@@ -115,8 +112,8 @@ const Edit = () => {
                 />
                 {errUsername ? (<div className="err">{errUsername}</div>) : (<></>)}
                 <br />
-                
-                
+
+
 
                 <label >First Name</label>
                 <input
@@ -148,7 +145,13 @@ const Edit = () => {
 
                 <br />
                 <input type="submit" value="Edit" className="btn edit-name-btn" onClick={handleSubmit} />
-                
+
+                {
+                    status === 200 ? (
+                        <div className="success">Your information edited successfully.</div>
+                    ) :
+                        (<></>)}
+
             </div>
         </>
 

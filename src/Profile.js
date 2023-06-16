@@ -25,11 +25,11 @@ const Profile = () => {
   const postURL = 'http://127.0.0.1:8000/api/posts/crud/'
   const profileURL = 'http://127.0.0.1:8000/api/accounts/profile/'
 
-    
-  useEffect(() => {
-    
 
-}, []);
+  useEffect(() => {
+
+
+  }, []);
 
 
   const getName = async () => {
@@ -53,27 +53,27 @@ const Profile = () => {
       navigate('/');
     else
       getName();
-      
+
     const getData = async () => {
       await axios.get(postURL, {
         headers: {
           'Authorization': `Bearer ${window.localStorage.getItem('token')}`, // Your token here
         }
       })
-      .then(res => {
+        .then(res => {
           // setUsername(res.data.user.username);
           // setDate(res.data.created);
           // setId(res.data.id);
           // setContent(res.data.text);
           let arr = res.data;
           setData(arr);
-      })
-      .catch (err => {
-        console.log(err.response.statusText);
-        if (err.response.statusText === "Unauthorized") {
-          navigate("/");
-        }
-      })
+        })
+        .catch(err => {
+          console.log(err.response.statusText);
+          if (err.response.statusText === "Unauthorized") {
+            navigate("/");
+          }
+        })
     }
 
     getData();
