@@ -16,6 +16,10 @@ body {
   margin: 0;
 }
 
+.post-tl {
+  padding-top: 2rem;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -102,12 +106,12 @@ body {
 
 .timeline {
   max-width: 100%;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 .timeline-container {
   width: 80%;
-  margin: 9rem auto;
+  margin: 10rem auto;
 }
 
 .page-link {

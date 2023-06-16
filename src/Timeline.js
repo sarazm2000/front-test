@@ -50,7 +50,7 @@ const Timeline = () => {
         <h1 className='title-page'>Timeline</h1>
       </div>
       <div className="timeline-container">
-        <div className="timeline">
+        <div className="timeline post-tl">
 
           {posts.map((post, index) => (
             <div key={index} className="post">
