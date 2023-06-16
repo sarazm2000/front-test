@@ -69,7 +69,10 @@ const Profile = () => {
           setData(arr);
       })
       .catch (err => {
-        console.log(err.response);
+        console.log(err.response.statusText);
+        if (err.response.statusText === "Unauthorized") {
+          navigate("/");
+        }
       })
     }
 
